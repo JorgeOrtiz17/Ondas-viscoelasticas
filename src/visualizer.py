@@ -5,26 +5,24 @@ Módulo de visualización para snapshots de la propagación de ondas.
 """
 
 import matplotlib.pyplot as plt
-import numpy as np
+
+def create_snapshot_figure(p, t):
+    """Genera y devuelve una figura de Matplotlib para un snapshot."""
+    fig, ax = plt.subplots(figsize=(8, 6))
+    im = ax.imshow(p.T, cmap='RdBu', origin='lower', aspect='auto', vmin=-0.05, vmax=0.05)
+    cbar = fig.colorbar(im, ax=ax)
+    cbar.set_label('Amplitud de Presión')
+    ax.set_title(f"Frente de onda en paso de tiempo {t}")
+    ax.set_xlabel("Distancia X (nodos)")
+    ax.set_ylabel("Distancia Z (nodos)")
+    fig.tight_layout()
+    return fig
+
 
 def plot_snapshot(p, step, t):
-    """
-    Genera un heatmap del campo de presión.
-    p: matriz de presión (nx, nz).
-    step: número de paso para el nombre del archivo.
-    """
-    plt.figure(figsize=(8, 6))
-    
-    # 'RdBu' es el colormap estándar en geofísica para ver ondas (rojo/azul)
-    # vmin/vmax ayuda a normalizar el contraste para ver bien la onda
-    plt.imshow(p.T, cmap='RdBu', origin='lower', aspect='auto', vmin=-0.05, vmax=0.05)
-    
-    plt.colorbar(label='Amplitud de Presión')
-    plt.title(f"Frente de onda en paso de tiempo {t}")
-    plt.xlabel("Distancia X (nodos)")
-    plt.ylabel("Distancia Z (nodos)")
-    
-    # Guardar la imagen para tu informe
-    plt.savefig(f"outputs/snapshot_{step:04d}.png")
-    plt.close() # Importante: cerrar para liberar memoria
-    print(f"Snapshot guardado: outputs/snapshot_{step:04d}.png")
+    """Genera un heatmap del campo de presión y guarda la imagen."""
+    fig = create_snapshot_figure(p, t)
+    output_path = f"outputs/snapshot_{step:04d}.png"
+    fig.savefig(output_path)
+    plt.close(fig)
+    print(f"Snapshot guardado: {output_path}")
