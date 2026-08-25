@@ -111,11 +111,11 @@ with tab_sim:
                 if snaps:
                     sel = st.selectbox("Ver snapshot:", snaps)
                     if sel:
-                        st.image(f"outputs/{sel}", use_container_width=True)
+                        st.image(f"outputs/{sel}", use_column_width=True)
 
             with c2:
                 if os.path.exists('outputs/seismogram.png'):
-                    st.image('outputs/seismogram.png', use_container_width=True)
+                    st.image('outputs/seismogram.png', use_column_width=True)
 
         except ValueError as e:
             status.error(f"❌ {e}")
@@ -182,10 +182,10 @@ with tab_exp:
         c_seis, c_snap = st.columns(2)
         with c_seis:
             st.image('outputs/figura4_sismograma.png', caption="Figura 4 — Sismograma",
-                     use_container_width=True)
+                     use_column_width=True)
         with c_snap:
             st.image('outputs/figura3_snapshots.png', caption="Figura 3 — Snapshots",
-                     use_container_width=True)
+                     use_column_width=True)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -247,11 +247,11 @@ with tab_val:
         c_v1, c_v2 = st.columns(2)
         with c_v1:
             st.image('outputs/val_elastico.png',
-                     caption="Numérico vs. Analítico", use_container_width=True)
+                     caption="Numérico vs. Analítico", use_column_width=True)
         with c_v2:
             if os.path.exists('outputs/val_spreading.png'):
                 st.image('outputs/val_spreading.png',
-                         caption="Decaimiento geométrico 2D", use_container_width=True)
+                         caption="Decaimiento geométrico 2D", use_column_width=True)
 
 # ── Pie de página ─────────────────────────────────────────────────────────────
 st.sidebar.markdown("---")
